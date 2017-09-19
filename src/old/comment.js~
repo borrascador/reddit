@@ -1,0 +1,137 @@
+import React from 'react';
+import ReactDOM from 'react-dom';
+import './index.css'
+
+class Test extends React.Component {
+  render () {
+    let comment = this.props.comment;
+    let deleteComment = this.props.deleteComment;
+
+    return (
+      <li className="comment" key={comment.key}>
+        <div className="comment"
+          <div className="commentHeader">
+            <button type="button" className="foldButton">V</button>
+            <span>u/name</span>
+            <span></span>
+          </div>
+          <div className="commentText">
+            {comment.text} 
+          </div>
+          <div className="commentFooter">
+            <span>X comments</span>
+            <div className="actionButtons">
+              <button 
+                type="button"
+                className="replyButton"
+                onClick={() => deleteComment(comment)}>R</button>
+              <button type="button" className="upButton">^</button>
+              <span>X</span>
+              <button type="button" className="downButton">v</button>
+            </div>
+          </div>
+        </div>
+      </li>
+    );
+  }
+}
+
+class Comment extends React.Component {
+  render () {
+    let comment    = this.props.comment;
+    let addComment = this.props.addComment;
+
+    return (
+      <div className="comment">
+        <div className="commentHeader">
+          {comment.key}
+        </div>
+        <div className="commentText">
+          {comment.text}
+        </div>
+        <div className="commentFooter">
+          {comment.score}
+        </div>
+        <div className="commentReplyBox">
+          <form onSubmit={addComment}>
+            <input ref={(a) => this._inputElement = a}
+              placeholder="enter comment">
+            </input>
+            <button type="submit">+</button>
+          </form>
+        </div>
+      </div>
+    );
+  }
+}    
+
+class CommentList extends React.Component {
+  render() {
+    let commentList = this.props.commentList;
+    let addComment  = this.props.addComment;
+
+    function createComments(comment) {
+      return (
+        <li key={comment.key}>
+          <Comment comment={comment} addComment={addComment}/>
+          <Thread />
+        </li>
+      );
+    }
+
+    let listComments = commentList.map(createComments);
+
+    return (
+      <ul className="replyList">
+        {listComments}
+      </ul>
+    );
+  }
+}
+
+class Thread extends React.Component {
+  constructor(props) {
+    super(props);
+
+    this.state = {
+      comments: [],
+    }
+
+    this.addComment = this.addComment.bind(this);
+    this.deleteComment = this.deleteComment.bind(this);
+  }
+
+  addComment(e) {
+    if (this._inputElement.value !== "") {
+      let commentArray = this.state.comments;
+
+      commentArray.push(
+        {
+          text: this._inputElement.value,
+          key: Date.now(),
+          score: 0
+        }
+      );
+
+      this.setState({
+        comments: commentArray
+      });
+    }
+
+    this._inputElement.value = "";
+    e.preventDefault();
+  }
+
+  render() {
+    return (
+      <div className="thread">
+        <Comment addComment={this.addComment}/>
+        <CommentList commentList={this.state.comments} addComment={this.addComment}/>
+      </div>
+    );
+  }
+}
+
+ReactDOM.render(
+  <Thread />,
+  document.getElementById('root'));
