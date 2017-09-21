@@ -5,10 +5,20 @@ class Comment extends Component {
   render() {
     return (
       <li key={this.props.key}>
-        {this.props.text}
+        <div className="comment-body">
+          <span>{this.props.id}, son of {this.props.parentId}</span>
+          <p>
+            {this.props.text}
+          </p>
+          <input
+            type="text" 
+            value={this.props.textInput}
+            onChange={this.props.handleInputChange} />
+        </div>
         <CommentList 
           parentId={this.props.id}
-          comments={this.props.comments} />       
+          comments={this.props.comments}
+          handleInputChange={this.props.handleInputChange} />       
       </li>
     );
   }

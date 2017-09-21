@@ -5,9 +5,14 @@ class Comment extends Component {
   render() {
     return (
       <li key={this.props.key}>
-        {this.props.text}
+        <div className="comment-body">
+          <span>{this.props.id}, son of {this.props.parentId}</span>
+          <p>
+            {this.props.text}
+          </p>
+        </div>
         <CommentList 
-          parentKey={this.props.key}
+          parentId={this.props.id}
           comments={this.props.comments} />       
       </li>
     );

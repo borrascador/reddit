@@ -11,7 +11,7 @@ class CommentList extends Component {
     function createComments(comment) {
       return (
         <Comment
-          key={comment.id}
+          key={comment.key}
           id={comment.id}
           parentId={comment.parentId}
           text={comment.text}

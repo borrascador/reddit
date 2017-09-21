@@ -1,6 +1,5 @@
 import React, { Component } from 'react';
 import Comment from '../components/Comment.js';
-import CommentList from '../components/CommentList.js';
 
 class ThreadContainer extends Component {
   constructor(props) {
@@ -21,27 +20,32 @@ class ThreadContainer extends Component {
           key: 1,
           id: 1,
           parentId: 0,
-          text: "Check out my funny joke!"
+          text: "Check out my funny joke!",
+          textInput: ''
         }, {
           key: 2,
           id: 2,
           parentId: 1,
-          text: "Wow, that's great!"
+          text: "Wow, that's great!",
+          textInput: ''
         }, {
           key: 3,
           id: 3,
           parentId: 1,
-          text: "LOL'D"
+          text: "LOL'D",
+          textInput: ''
         }, {
           key: 4,
           id: 4,
           parentId: 3,
-          text: "Hahaha just imagined you laughing, bro. LOL'D indeed."
+          text: "Hahaha just imagined you laughing, bro. LOL'D indeed.",
+          textInput: ''
         }, {
           key: 5,
           id: 5,
           parentId: 1,
-          text: "Am I third or fourth to the party?"
+          text: "Am I third or fourth to the party?",
+          textInput: ''
         }
       ],
     };
@@ -94,7 +98,9 @@ class ThreadContainer extends Component {
           id={firstComment.id}
           parentId={firstComment.parentId}
           text={firstComment.text}
-          comments={this.state.comments} />
+          comments={this.state.comments}
+          value={firstComment.textInput}
+          handleInputChange={this.handleInputChange} />
       </ul>
     );
   }
