@@ -10,10 +10,16 @@ class Comment extends Component {
           <p>
             {this.props.text}
           </p>
+          <input
+            id={this.props.id}
+            type="text" 
+            value={this.props.textInput}
+            onChange={this.props.handleInputChange} />
         </div>
         <CommentList 
           parentId={this.props.id}
-          comments={this.props.comments} />       
+          comments={this.props.comments}
+          handleInputChange={this.props.handleInputChange} />       
       </li>
     );
   }

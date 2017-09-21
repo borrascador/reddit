@@ -81,10 +81,18 @@ class ThreadContainer extends Component {
   handleInputChange(event) {
     let target = event.target;
     let value = target.value;
-    let name = target.name;
+    let name = target.className;
+    let id = target.id;
+    console.log(id);
+
+    let commentArray = this.state.comments;
+
+    let index = commentArray.indexOf(target);
+    
+    console.log(commentArray[0], index);
 
     this.setState({
-      [name]: value
+      comments: commentArray
     });
   }
 
@@ -92,16 +100,21 @@ class ThreadContainer extends Component {
     let firstComment = this.state.comments[0];
 
     return (
-      <ul>
-        <Comment
-          key={firstComment.key}
-          id={firstComment.id}
-          parentId={firstComment.parentId}
-          text={firstComment.text}
-          comments={this.state.comments}
-          textInput={firstComment.textInput}
-          handleInputChange={this.handleInputChange} />
-      </ul>
+      <div>
+        <h1>
+          REDDITYET?
+        </h1>
+        <ul>
+          <Comment
+            key={firstComment.key}
+            id={firstComment.id}
+            parentId={firstComment.parentId}
+            text={firstComment.text}
+            textInput={firstComment.textInput}
+            comments={this.state.comments}
+            handleInputChange={this.handleInputChange} />
+        </ul>
+      </div>
     );
   }
 }

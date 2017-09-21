@@ -14,6 +14,7 @@ class CommentList extends Component {
           id={comment.id}
           parentId={comment.parentId}
           text={comment.text}
+          textInput={comment.textInput}
           comments={passedComments}
           handleInputChange={handleInputChange} />
       )

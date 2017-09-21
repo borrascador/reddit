@@ -3,7 +3,7 @@ import React, { Component } from 'react';
 class InputReply extends Component {
   render() {
     return (
-      <form onSubmit={this.props.handleSubmitComment}>
+      <form>
         <label>
           Username:
           <input

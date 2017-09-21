@@ -11,6 +11,8 @@ class Comment extends Component {
             {this.props.text}
           </p>
           <input
+            id={this.props.id}
+            className="textInput"
             type="text" 
             value={this.props.textInput}
             onChange={this.props.handleInputChange} />
