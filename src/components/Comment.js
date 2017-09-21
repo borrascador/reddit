@@ -1,16 +1,15 @@
 import React, { Component } from 'react';
-import InputReplyContainer from '../containers/InputReplyContainer.js';
+import CommentList from '../components/CommentList.js';
 
 class Comment extends Component {
   render() {
     return (
-      <div>
-        <div>
-          Dummy Comment --- Testing!
-        </div>
-        <InputReplyContainer
-          handleSubmitComment={this.props.handleSubmitComment} />
-      </div>    
+      <li key={this.props.key}>
+        {this.props.text}
+        <CommentList 
+          parentId={this.props.id}
+          comments={this.props.comments} />       
+      </li>
     );
   }
 }

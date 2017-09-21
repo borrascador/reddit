@@ -1,24 +1,68 @@
 import React, { Component } from 'react';
 import Comment from '../components/Comment.js';
+import CommentList from '../components/CommentList.js';
 
 class ThreadContainer extends Component {
   constructor(props) {
     super(props);
+
     this.state = {
-      comments: [],
+      comments: [
+        /*{
+          key: Date.now(),
+          parentComment: null,
+          username: 'Jan',
+          text: 'Hello, world!',
+          toggleInput: false,
+          usernameInput: '',
+          textInput: ''
+        }*/
+        {
+          key: 1,
+          id: 1,
+          parentId: 0,
+          text: "Check out my funny joke!"
+        }, {
+          key: 2,
+          id: 2,
+          parentId: 1,
+          text: "Wow, that's great!"
+        }, {
+          key: 3,
+          id: 3,
+          parentId: 1,
+          text: "LOL'D"
+        }, {
+          key: 4,
+          id: 4,
+          parentId: 3,
+          text: "Hahaha just imagined you laughing, bro. LOL'D indeed."
+        }, {
+          key: 5,
+          id: 5,
+          parentId: 1,
+          text: "Am I third or fourth to the party?"
+        }
+      ],
     };
+
     this.handleSubmitComment = this.handleSubmitComment.bind(this);
+    this.handleInputChange = this.handleInputChange.bind(this);
   }
 
-  handleSubmitComment(text, parentComment, e) {
+  handleSubmitComment(event) {
     let commentArray = this.state.comments;
 
     commentArray.push(
       {
-        text: text,
-        parentComment: parentComment,
         key: Date.now(),
-        score: 0
+        id: null,
+        parentId: null,
+        username: null,
+        text: null,
+        toggleInput: false,
+        usernameInput: '',
+        textInput: ''
       }
     );
 
@@ -27,15 +71,31 @@ class ThreadContainer extends Component {
     });
 
     console.log(this.state.comments);
-    e.preventDefault();
+    event.preventDefault();
+  }
+
+  handleInputChange(event) {
+    let target = event.target;
+    let value = target.value;
+    let name = target.name;
+
+    this.setState({
+      [name]: value
+    });
   }
 
   render () {
+    let firstComment = this.state.comments[0];
+
     return (
-      <div>
+      <ul>
         <Comment
-          handleSubmitComment={this.handleSubmitComment} />
-      </div>
+          key={firstComment.key}
+          id={firstComment.id}
+          parentId={firstComment.parentId}
+          text={firstComment.text}
+          comments={this.state.comments} />
+      </ul>
     );
   }
 }

@@ -21,7 +21,7 @@ class InputReply extends Component {
             value={this.props.text}
             onChange={this.props.handleInputChange} />
         </label>
-        <input type="submit" disabled={loading} value={loading ? 'Saving...' : 'Save'} className="buttonSave"/>
+        <button onClick={this.props.handleSubmitComment}>Submit</button>
       </form>
     );
   }

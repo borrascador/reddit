@@ -3,7 +3,7 @@ import React, { Component } from 'react';
 class InputReply extends Component {
   render() {
     return (
-      <form onSubmit={this.props.handleSubmitComment}>
+      <form>
         <label>
           Username:
           <input
@@ -21,7 +21,7 @@ class InputReply extends Component {
             value={this.props.text}
             onChange={this.props.handleInputChange} />
         </label>
-        <input type="submit" value="submit form"/>
+        <button onClick={this.props.handleSubmitComment}>Submit</button>
       </form>
     );
   }
