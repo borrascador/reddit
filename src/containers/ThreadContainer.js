@@ -83,14 +83,11 @@ class ThreadContainer extends Component {
     let value = target.value;
     let name = target.className;
     let id = target.id;
-    console.log(id);
 
     let commentArray = this.state.comments;
-
-    let index = commentArray.indexOf();
+    let index = commentArray.findIndex((obj => obj.id == id));
+    commentArray[index][name] = value;
     
-    console.log(commentArray[0], index);
-
     this.setState({
       comments: commentArray
     });
